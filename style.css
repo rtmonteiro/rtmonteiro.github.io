@@ -4,6 +4,6 @@ body {
 }
 
 #start {
+    width: 100vw;
     text-align: center;
-    align-self: center;
 }
