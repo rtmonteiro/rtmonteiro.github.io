@@ -1,6 +1,8 @@
 body {
     font-family: 'Roboto', sans-serif;
+    color: whitesmoke;
     display: flex;
+    background-color: #1d1e22;
 }
 
 #start {
