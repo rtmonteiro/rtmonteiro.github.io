@@ -1,11 +1,21 @@
 body {
+    padding: 0;
+    margin: 0;
     font-family: 'Roboto', sans-serif;
     color: whitesmoke;
-    display: flex;
     background-color: #1d1e22;
+    display: flex;
+    align-content: center;
+}
+
+h1 {
+    font-size: 40pt;
+    font-weight: 800;
 }
 
 #start {
     width: 100vw;
+    margin-top: 30vh;
+    /* height: 100vh; */
     text-align: center;
 }
