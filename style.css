@@ -1,45 +1,59 @@
-body {
-  font-family: 'Roboto', sans-serif;
-  color: rgb(220, 20, 60);
-  background-color: #1d1e22;
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  color: crimson;
+  background-color: #1d1e22;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
 
-#start {
-  width: 350px;
-  max-width: 80%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+a {
+  text-decoration: none;
+}
+
+.card {
   padding: 20px;
   border: 4px solid blue;
   border-radius: 10px;
   background-color: antiquewhite;
-  box-shadow: 3px 3px blue;
+  -webkit-box-shadow: 3px 3px blue;
+          box-shadow: 3px 3px blue;
   text-align: center;
 }
 
-span>a {
-  text-decoration: none;
+.card ul {
+  list-style: none;
 }
 
-
 footer {
-  width: 350px;
-  max-width: 80%;
   position: fixed;
   bottom: 0px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   text-align: center;
 }
 
 footer > a {
-  text-decoration: none;
-  color: rgb(220, 20, 60);
+  color: crimson;
 }
-
-
-@media (max-width : 425px) {
-}
+/*# sourceMappingURL=style.css.map */
