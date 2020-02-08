@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ryan's World - ThreeJS</title>
+  <script src="https://kit.fontawesome.com/f5be8e1e8e.js" crossorigin="anonymous"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Montserrat';
+    }
+
+    a {
+      position: absolute;
+      top: 3%;
+      left: 3%;
+      font-weight: bold;
+      cursor: pointer;    
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #text {
+      position: absolute;
+      top: 50vh;
+      left: 50vw;
+      transform: translate(-50%, -50%);
+
+      width: auto;
+
+      border: 5px solid black;
+      padding: .5em;
+      text-align: center;
+    }
+
+    #text h1 {
+      font-size: 7em;
+      text-transform: uppercase;
+      line-height: .8em;
+    }
+
+    #text p {
+      font-size: 2em
+    }
+  </style>
+</head>
+
+<body>
+
+  <a onclick="goBack()"><i class="fas fa-arrow-left"></i> Go Back</a>
+
+  <div id="text">
+    <h1>ThreeJS Rules!</h1>
+    <p><b>To have fun:</b> click in a cube!</p>
+  </div>
+  
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+  <script>
+    var scene = new THREE.Scene();
+
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    var renderer = new THREE.WebGLRenderer({
+      antialias: true
+    });
+    renderer.setClearColor('#e5e5e5');
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    document.body.appendChild(renderer.domElement);
+
+    window.addEventListener('resize', () => {
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      camera.aspect = window.innerWidth / window.innerHeight;
+
+      camera.updateProjectionMatrix();
+    })
+
+    var raycaster = new THREE.Raycaster();
+    var mouse = new THREE.Vector2();
+
+    var geometry = new THREE.BoxGeometry(1, 1, 1);
+    var material = new THREE.MeshLambertMaterial({
+      color: 0xF7F7F7
+    });
+    // var mesh = new THREE.Mesh(geometry, material);
+
+    // mesh.position.set(2, 2, -2);
+    // mesh.rotation.set(45, 0, 2);
+
+    // scene.add(mesh);
+
+    meshX = -10;
+    for (var j = 0; j < 15; ++j) {
+      var mesh = new THREE.Mesh(geometry, material);
+      mesh.position.x = (Math.random() - 0.5) * 10;
+      mesh.position.y = (Math.random() - 0.5) * 10;
+      mesh.position.z = (Math.random() - 0.5) * 10;
+      scene.add(mesh);
+      meshX++;
+    }
+
+    var light = new THREE.PointLight(0xFFFFFF, 1, 1000);
+    light.position.set(0, 0, 0);
+    scene.add(light);
+
+    var light = new THREE.PointLight(0xFFFFFF, 2, 1000);
+    light.position.set(0, 0, 25);
+    scene.add(light);
+
+    // This function refreshs de page everytime the window change it's size 
+    var render = function () {
+      requestAnimationFrame(render);
+
+      renderer.render(scene, camera);
+    };
+
+    function onMouseMove(event) {
+      event.preventDefault();
+
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+
+      var intersects = raycaster.intersectObjects(scene.children, true);
+      for (var i = 0; i < intersects.length; i++) {
+        // intersects[i].object.material.color.set(0xff0000);
+        this.tl = new TimelineMax();
+        const form = intersects[i].object;
+        const formPositionX = form.position.x;
+
+        const power = Math.floor(Math.random() * 10);
+        const direction = Math.pow(-1, power);
+        // console.log(direction, power);
+
+        this.tl.to(form.scale, 1, {
+          x: 2,
+          ease: Expo.easeOut
+        });
+        this.tl.to(form.scale, .5, {
+          x: 1,
+          ease: Expo.easeOut
+        });
+        this.tl.to(form.position, .5, {
+          x: formPositionX + direction * (Math.random() * 5),
+          ease: Expo.easeOut
+        });
+        this.tl.to(form.rotation, .5, {
+          y: Math.PI * .5,
+          ease: Expo.easeOut
+        }, "=-1.5");
+      }
+    }
+
+    window.addEventListener('click', onMouseMove);
+    render();
+  </script>
+</body>
+
+</html>
