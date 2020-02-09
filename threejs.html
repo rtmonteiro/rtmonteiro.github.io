@@ -20,6 +20,7 @@
       position: absolute;
       top: 3%;
       left: 3%;
+      font-size: 1.2rem;
       font-weight: bold;
       cursor: pointer;    
     }
@@ -42,13 +43,19 @@
     }
 
     #text h1 {
-      font-size: 7em;
+      font-size: 7rem;
       text-transform: uppercase;
-      line-height: .8em;
+      /* line-height: 1em; */
     }
 
     #text p {
       font-size: 2em
+    }
+
+    @media (max-width: 650px) {
+      #text h1 {
+        font-size: 4em;
+      }
     }
   </style>
 </head>
@@ -143,6 +150,7 @@
         this.tl = new TimelineMax();
         const form = intersects[i].object;
         const formPositionX = form.position.x;
+        const formRotationY = form.rotation.y;
 
         const power = Math.floor(Math.random() * 10);
         const direction = Math.pow(-1, power);
@@ -161,9 +169,9 @@
           ease: Expo.easeOut
         });
         this.tl.to(form.rotation, .5, {
-          y: Math.PI * .5,
+          y: formRotationY + direction * (Math.PI * .5),
           ease: Expo.easeOut
-        }, "=-1.5");
+        }, "-=1.5");
       }
     }
 
