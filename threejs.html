@@ -22,7 +22,7 @@
       left: 3%;
       font-size: 1.2rem;
       font-weight: bold;
-      cursor: pointer;    
+      cursor: pointer;
     }
 
     canvas {
@@ -68,7 +68,7 @@
     <h1>ThreeJS Rules!</h1>
     <p><b>To have fun:</b> click in a cube!</p>
   </div>
-  
+
   <script>
     function goBack() {
       window.history.back();
@@ -149,6 +149,7 @@
         // intersects[i].object.material.color.set(0xff0000);
         this.tl = new TimelineMax();
         const form = intersects[i].object;
+        // console.log(form);
         const formPositionX = form.position.x;
         const formRotationY = form.rotation.y;
 
@@ -159,16 +160,13 @@
         this.tl.to(form.scale, 1, {
           x: 2,
           ease: Expo.easeOut
-        });
-        this.tl.to(form.scale, .5, {
+        }).to(form.scale, .5, {
           x: 1,
           ease: Expo.easeOut
-        });
-        this.tl.to(form.position, .5, {
+        }).to(form.position, .5, {
           x: formPositionX + direction * (Math.random() * 5),
           ease: Expo.easeOut
-        });
-        this.tl.to(form.rotation, .5, {
+        }).to(form.rotation, .5, {
           y: formRotationY + direction * (Math.PI * .5),
           ease: Expo.easeOut
         }, "-=1.5");
